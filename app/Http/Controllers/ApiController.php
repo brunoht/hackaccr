@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class CrudController extends Controller
+class ApiController extends Controller
 {
+    protected $model;
+
     /**
      * Display a listing of the resource.
      *
@@ -13,17 +15,7 @@ class CrudController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return $this->model->all();
     }
 
     /**
@@ -34,7 +26,8 @@ class CrudController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        return $this->model->create($request->all());
     }
 
     /**
@@ -45,18 +38,7 @@ class CrudController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return $this->model->find($id);
     }
 
     /**
@@ -68,7 +50,9 @@ class CrudController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $obj = $this->model->find($id);
+        return $obj->update($data);
     }
 
     /**
@@ -79,6 +63,7 @@ class CrudController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $obj = $this->model->find($id);
+        return $obj->delete();
     }
 }

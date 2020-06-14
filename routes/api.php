@@ -28,10 +28,11 @@ Route::group([
     Route::post('me', 'AuthController@me');
 });
 
-Route::middleware('auth:api')->resource('event', 'EventController');
-Route::middleware('auth:api')->resource('place', 'PlaceController');
-Route::middleware('auth:api')->resource('review', 'ReviewController');
-Route::middleware('auth:api')->resource('route', 'RouteController');
-Route::middleware('auth:api')->resource('score', 'ScoreController');
-Route::middleware('auth:api')->resource('tip', 'TipController');
 
+Route::middleware('auth:api')->resource('user', 'UserController')->except(['create', 'edit']);
+Route::middleware('auth:api')->resource('event', 'EventController')->except(['create', 'edit']);
+Route::middleware('auth:api')->resource('place', 'PlaceController')->except(['create', 'edit']);
+Route::middleware('auth:api')->resource('review', 'ReviewController')->except(['create', 'edit']);
+Route::middleware('auth:api')->resource('route', 'RouteController')->except(['create', 'edit']);
+Route::middleware('auth:api')->resource('score', 'ScoreController')->except(['create', 'edit']);
+// Route::middleware('auth:api')->resource('tip', 'TipController')->except(['create', 'edit']);
