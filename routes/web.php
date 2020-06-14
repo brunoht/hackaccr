@@ -13,22 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect('/usuario');
+Route::any('/', function () {
+    return response()->json(['error' => 'Unauthorized'], 401);
 });
 
-// Route::get('/login-email', function () {
-//     return view('login-email');
-// });
 Route::get('/login', function () {
-    return view('login-otp');
+    return response()->redirectTo('/');
 })->name('login');
-
-Route::get('/login/{mobile}', function ($mobile) {
-    return view('login-otp-validate', compact('mobile'));
-});
-
-
-Route::middleware('auth:api')->get('/usuario', function () {
-    return "Usuário";
-});
