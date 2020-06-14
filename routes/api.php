@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::group([
 
-    'middleware' => 'api',
     'prefix' => 'auth'
 
 ], function ($router) {
@@ -29,6 +28,10 @@ Route::group([
     Route::post('me', 'AuthController@me');
 });
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::middleware('auth:api')->resource('event', 'EventController');
+Route::middleware('auth:api')->resource('place', 'PlaceController');
+Route::middleware('auth:api')->resource('review', 'ReviewController');
+Route::middleware('auth:api')->resource('route', 'RouteController');
+Route::middleware('auth:api')->resource('score', 'ScoreController');
+Route::middleware('auth:api')->resource('tip', 'TipController');
+
