@@ -93,7 +93,7 @@ class AuthController extends Controller
                 'body' => "Sua senha de acesso: " . $otp
             ]
         ]);
-        Log::info($response);
+        Log::info($response->getBody()->getContents());
         return response()->json(['success' => $user, 'otp' => $otp], 200);
     }
 
