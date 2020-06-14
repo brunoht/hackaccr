@@ -53,6 +53,8 @@ class AuthController extends Controller
             'password' => $otp,
         ];
 
+        Log::info($credentials);
+
         if (!$token = auth('api')->attempt($credentials)) {
             $this->clearOTP($mobile);
             return response()->json(['error' => 'Unauthorized'], 401);
