@@ -15,6 +15,10 @@ class CreatePlacesTable extends Migration
     {
         Schema::create('places', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('address');
+            $table->string('image');
+            $table->string('google_maps_url');
             $table->timestamps();
         });
     }

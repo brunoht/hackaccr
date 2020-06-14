@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use GuzzleHttp\Client;
 
 class AuthController extends Controller
 {
@@ -80,6 +81,18 @@ class AuthController extends Controller
         $otp = rand(1000, 9999);
         $user = User::where('mobile', $request->mobile)->update(['password' => bcrypt($otp)]);
         // TODO: send otp to mobile no using whatsapp api
+        $client = new Client([
+            'base_uri' => 'https://eu142.chat-api.com/instance138408/'
+        ]);
+        $response = $client->request('POST', 'sendMessage', [
+            'query' => [
+                'token' => "w8kyn32q5qmjcd0n"
+            ],
+            'form_params' => [
+                'phone' => "55" . $mobile,
+                'body' => "Sua senha de acesso: " . $otp
+            ]
+        ]);
         return response()->json(['success' => $user, 'otp' => $otp], 200);
     }
 
