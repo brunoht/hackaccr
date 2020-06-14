@@ -53,7 +53,7 @@ class AuthController extends Controller
             'password' => $otp,
         ];
 
-        Log::info($credentials);
+        Log::info($mobile);
 
         if (!$token = auth('api')->attempt($credentials)) {
             $this->clearOTP($mobile);
